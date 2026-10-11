@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='parameters.css') }}">
+    </head>
+
+    <body>
+        <h1>Parameters for the Artificial Immune Network</h1>
+
+        {% if error %}
+        <p style="color: darkred;"><strong>{{ error }}</strong></p>
+        {% endif %}
+
+        <form method="POST">
+            <input type="number" name="population_size" value="{{ settings.population_size }}">
+            <label>Movie population size</label><br>
+
+            <input type="number" name="iterations" value="{{ settings.iterations }}">
+            <label>Number of training Generations</label><br>
+
+            <input type="number" name="n_best" value="{{ settings.n_best }}">
+            <label>Number of best selected antibodies for cloning</label><br>
+
+            <input type="number" name="n_clones" value="{{ settings.n_clones }}">
+            <label>Number of clones produced per selected antibody</label><br>
+
+            <p>During hypermutation, a random number between the lower and upper bound can be added to a value in the antibody vector.</p>
+            <input type="number" step="any" name="mutation_lb" value="{{ settings.mutation_lb }}">
+            <label>Mutation lower bound</label><br>
+            <input type="number" step="any" name="mutation_ub" value="{{ settings.mutation_ub }}">
+            <label>Mutation upper bound</label><br><br>
+
+            <input type="number" step="any" name="suppression_threshold" value="{{ settings.suppression_threshold }}">
+            <label>Suppression threshold</label><br>
+
+            <input type="number" step="any" name="stimulation_threshold" value="{{ settings.stimulation_threshold }}">
+            <label>Stimulation threshold</label><br><br>
+
+            <input type="number" name="top_n_movies" value="{{ settings.top_n_movies }}">
+            <label>Number of movies to be recommended</label><br><br>
+
+            <label>Affinity function</label><br>
+            <select name="affinity_function">
+                <option value="cosine" {% if settings.affinity_function == 'cosine' %}selected{% endif %}>Cosine similarity</option>
+                <option value="euclidean" {% if settings.affinity_function == 'euclidean' %}selected{% endif %}>Euclidean distance</option>
+                <option value="dot" {% if settings.affinity_function == 'dot' %}selected{% endif %}>Dot product</option>
+                <option value="rbf" {% if settings.affinity_function == 'rbf' %}selected{% endif %}>RBF affinity</option>
+            </select><br><br>
+
+            <input type="number" step="any" name="gamma" value="{{ settings.gamma }}">
+            <label>RBF gamma</label><br><br>
+
+            <h3>Choose user type</h3>
+            <div>
+                <label>Existing user in the database</label>
+                <input type="radio" name="user_type" value="existing" {% if settings.user_type == 'existing' %}checked{% endif %}><br>
+
+                <label>New user</label>
+                <input type="radio" name="user_type" value="new" {% if settings.user_type != 'existing' %}checked{% endif %}><br>
+            </div>
+
+            <label>Existing user id: choose between [1-943]</label><br>
+            <input type="number" name="user_id" min="1" max="943" value="{{ settings.existing_user_id }}"><br><br>
+
+            <button type="submit">Submit</button>
+
+        </form>
+    </body>
+</html>
