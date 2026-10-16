@@ -1,0 +1,96 @@
+body {
+    margin-top: 0px;
+    font: Shanti;
+    font-size: 1.2em;
+    background-color: rgba(127, 136, 179, 0.993);
+}
+
+table {
+    margin-bottom: 10px;
+    
+}
+
+select {
+    height: 50px;
+    font: Shanti;
+    font-size: 1em;
+}
+
+#tUser_profile {
+    text-align: center;
+    border-radius: 8px;
+    margin-left: 0px;
+}
+
+.recommendations {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.movie-card {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(68, 105, 93);
+    text-align: center;
+}
+
+.plot-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.plot-card {
+    background-color: darkslateblue;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.plot-card img {
+    display: block;
+    max-width: 100%;
+    background-color: indianred;
+}
+
+.compare-info {
+    background-color: rgb(197, 136, 211);
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 15px;
+    max-width: 900px;
+}
+
+.compare-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.compare-table th, .compare-table td {
+    padding: 6px 10px;
+    text-align: left;
+}
+
+button {
+    background-color: palevioletred;
+    width: 300px;
+    height: 60px;
+    margin: 30px;
+    border-radius: 8px;
+}
+
+.metrics-table {
+    max-width: 900px;
+    border-radius: 8px;
+}
+
+.metrics-table td, .metrics-table th {
+    vertical-align: top;
+}
+
+.error {
+    color: darkred;
+    font-weight: bold;
+}
