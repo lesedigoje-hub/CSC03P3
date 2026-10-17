@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for
-#from werkzeug.wrappers import Response
 
 from src.data_loader import get_movies, get_ratings, create_users
 from src.models import Movie, MovieRating, User
