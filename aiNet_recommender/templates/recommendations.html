@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Recommendations</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+
+    <body>
+        <h1>Adaptive Movie Recommendation System</h1>
+
+        <p><a href="{{ url_for('parameters') }}">&larr; change parameters</a></p>
+
+        {% if user_type == 'existing' %}
+        <h4>Showing existing user {{ existing_user_id }}, based on their rating history and anything rated in this session.</h4>
+        {% else %}
+        <h4>Welcome! rate a few movies below to build your profile.</h4>
+        {% endif %}
+
+        <h3>User Preference Profile</h3>
+
+        <table id="tUser_profile" border="1">
+            <tr>
+                <th>Genre</th>
+                <th>Score</th>
+            </tr>
+            {% for genre, score in profile_rows %}
+            <tr>
+                <td>{{ genre }}</td>
+                <td>{{ score }}</td>
+            </tr>
+            {% endfor %}
+        </table><br>
+
+        <h4>Rate a few movies below and click Update to refine your recommendations.</h4>
+
+        <form action="{{ url_for('rate') }}" method="post">
+            <table>
+                {% for movie in movie_objects %}
+                <tr>
+                    <td>{{ movie.name }}</td>
+                    <td>
+                        <select name="rating_{{ movie.id }}">
+                            <option value="0" {% if ratings.get(movie.id, 0) == 0 %}selected{% endif %}>Not rated</option>
+                            <option value="1" {% if ratings.get(movie.id) == 1 %}selected{% endif %}>1</option>
+                            <option value="2" {% if ratings.get(movie.id) == 2 %}selected{% endif %}>2</option>
+                            <option value="3" {% if ratings.get(movie.id) == 3 %}selected{% endif %}>3</option>
+                            <option value="4" {% if ratings.get(movie.id) == 4 %}selected{% endif %}>4</option>
+                            <option value="5" {% if ratings.get(movie.id) == 5 %}selected{% endif %}>5</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <button type="submit">Update</button>
+        </form>
+
+        {% if not movie_objects %}
+        <p>No unrated movies left to offer — you have rated everything!</p>
+        {% endif %}
+
+        <h2>Recommended Movies</h2>
+
+        {% if recommendations %}
+        <div class="recommendations">
+            {% for movie, affinity in recommendations %}
+            <div class="movie-card">
+                <p>{{ movie.name }}</p>
+                <p><small>affinity: {{ '%.3f' % affinity }}</small></p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No recommendations yet.</p>
+        {% endif %}
+
+        <br>
+        <p><a href="{{ url_for('plots') }}">View population evolution plots &rarr;</a></p>
+        <p><a href="{{ url_for('compare') }}">Compare aiNet vs kNN &rarr;</a></p>
+    </body>
+</html>

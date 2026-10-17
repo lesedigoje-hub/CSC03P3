@@ -1,0 +1,45 @@
+body {
+    background-color: slategray;
+}
+
+button {
+    background-color: palevioletred;
+    width: 300px;
+    height: 60px;
+    margin: 30px;
+}
+
+select {
+    height: 50px;
+    font: Shanti;
+    font-size: 1em;
+}
+
+label {
+    font: Shanti;
+    color: white;
+    margin-left: 20px;
+    font-size: 1.4em;
+}
+
+input {
+    width: 150px;
+    height: 35px;
+    font-size: 1em;
+}
+
+#lbExisting_user {
+    margin-left:0px;
+}
+
+#lbNew_user {
+    margin-left:0px;
+}
+
+#user_type {
+    margin-left:0px;
+}
+
+#hUser_type {
+    font-size: 1.5em;
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Plots</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+
+    <body>
+        <h1>Adaptive Movie Recommendation System</h1>
+
+        <p><a href="{{ url_for('recommendations') }}">&larr; back to recommendations</a></p>
+
+        <h2>Population Evolution Plots : Telemetry</h2>
+
+        <p>
+            Each plot shows the antibody population (movie genre vectors) projected onto two dimensions
+            using PCA. The red star marks the user's preference profile (antigen). Across checkpoints
+            you can observe the population converging toward the antigen and clustering around high
+            affinity regions.
+        </p>
+
+        {% if plot_images %}
+        <div class="plot-grid">
+            {% for plot in plot_images %}
+            <div class="plot-card">
+                <h4>{{ plot.label }}</h4>
+                <img src="data:image/png;base64,{{ plot.img }}" alt="{{ plot.label }}">
+                <p>
+                    Best affinity: {{ '%.3f' % plot.best_affinity }}<br>
+                    Mean affinity: {{ '%.3f' % plot.mean_affinity }}<br>
+                    Mean net stimulation: {{ '%.3f' % plot.mean_net_stimulation }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No plots available yet. Go back and run a recommendation first.</p>
+        {% endif %}
+    </body>
+</html>
